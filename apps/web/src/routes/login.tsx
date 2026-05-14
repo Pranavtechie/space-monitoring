@@ -3,7 +3,7 @@ import { Input } from "@app/ui/components/input";
 import { Label } from "@app/ui/components/label";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Loader2 } from "lucide-react";
-import { useState } from "react";
+import { useReducer } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -26,24 +26,70 @@ type PendingSignup = {
   password: string;
 };
 
+type LoginState = {
+  email: string;
+  password: string;
+  name: string;
+  pendingSignup: PendingSignup | null;
+  error: string | null;
+  isSubmitting: boolean;
+  socialProvider: "google" | "twitter" | null;
+};
+
+type LoginAction =
+  | { type: "set-email"; value: string }
+  | { type: "set-password"; value: string }
+  | { type: "set-name"; value: string }
+  | { type: "set-pending-signup"; value: PendingSignup | null }
+  | { type: "set-error"; value: string | null }
+  | { type: "set-submitting"; value: boolean }
+  | { type: "set-social-provider"; value: LoginState["socialProvider"] }
+  | { type: "reset-pending-signup" };
+
+const initialLoginState: LoginState = {
+  email: "",
+  password: "",
+  name: "",
+  pendingSignup: null,
+  error: null,
+  isSubmitting: false,
+  socialProvider: null,
+};
+
+function loginReducer(state: LoginState, action: LoginAction): LoginState {
+  switch (action.type) {
+    case "set-email":
+      return { ...state, email: action.value };
+    case "set-password":
+      return { ...state, password: action.value };
+    case "set-name":
+      return { ...state, name: action.value };
+    case "set-pending-signup":
+      return { ...state, pendingSignup: action.value };
+    case "set-error":
+      return { ...state, error: action.value };
+    case "set-submitting":
+      return { ...state, isSubmitting: action.value };
+    case "set-social-provider":
+      return { ...state, socialProvider: action.value };
+    case "reset-pending-signup":
+      return { ...state, pendingSignup: null, error: null };
+  }
+}
+
 function RouteComponent() {
   const navigate = useNavigate({ from: "/login" });
   const { isPending } = authClient.useSession();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [pendingSignup, setPendingSignup] = useState<PendingSignup | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [socialProvider, setSocialProvider] = useState<"google" | "twitter" | null>(null);
+  const [state, dispatch] = useReducer(loginReducer, initialLoginState);
+  const { email, error, isSubmitting, name, password, pendingSignup, socialProvider } = state;
 
   const redirectToApp = () => {
     navigate({ to: "/" });
   };
 
   const signInWithSocial = async (provider: "google" | "twitter") => {
-    setError(null);
-    setSocialProvider(provider);
+    dispatch({ type: "set-error", value: null });
+    dispatch({ type: "set-social-provider", value: provider });
 
     await authClient.signIn.social(
       {
@@ -54,7 +100,7 @@ function RouteComponent() {
       },
       {
         onError: (authError) => {
-          setSocialProvider(null);
+          dispatch({ type: "set-social-provider", value: null });
           toast.error(authError.error.message || authError.error.statusText);
         },
       },
@@ -63,7 +109,7 @@ function RouteComponent() {
 
   const submitCredentials = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setError(null);
+    dispatch({ type: "set-error", value: null });
 
     const parsed = credentialsSchema.safeParse({
       email,
@@ -71,20 +117,26 @@ function RouteComponent() {
     });
 
     if (!parsed.success) {
-      setError(parsed.error.issues[0]?.message ?? "Check your email and password");
+      dispatch({
+        type: "set-error",
+        value: parsed.error.issues[0]?.message ?? "Check your email and password",
+      });
       return;
     }
 
     const normalizedEmail = parsed.data.email.toLowerCase();
-    setIsSubmitting(true);
+    dispatch({ type: "set-submitting", value: true });
 
     try {
       const exists = await accountExists({ data: { email: normalizedEmail } });
 
       if (!exists) {
-        setPendingSignup({
-          email: normalizedEmail,
-          password: parsed.data.password,
+        dispatch({
+          type: "set-pending-signup",
+          value: {
+            email: normalizedEmail,
+            password: parsed.data.password,
+          },
         });
         toast.info("Add your name to finish creating your account");
         return;
@@ -101,14 +153,17 @@ function RouteComponent() {
             redirectToApp();
           },
           onError: (authError) => {
-            setError(authError.error.message || authError.error.statusText);
+            dispatch({
+              type: "set-error",
+              value: authError.error.message || authError.error.statusText,
+            });
           },
         },
       );
     } catch {
-      setError("Unable to check this account right now");
+      dispatch({ type: "set-error", value: "Unable to check this account right now" });
     } finally {
-      setIsSubmitting(false);
+      dispatch({ type: "set-submitting", value: false });
     }
   };
 
@@ -122,12 +177,15 @@ function RouteComponent() {
     const parsedName = nameSchema.safeParse(name);
 
     if (!parsedName.success) {
-      setError(parsedName.error.issues[0]?.message ?? "Enter your name");
+      dispatch({
+        type: "set-error",
+        value: parsedName.error.issues[0]?.message ?? "Enter your name",
+      });
       return;
     }
 
-    setError(null);
-    setIsSubmitting(true);
+    dispatch({ type: "set-error", value: null });
+    dispatch({ type: "set-submitting", value: true });
 
     await authClient.signUp.email(
       {
@@ -141,12 +199,15 @@ function RouteComponent() {
           redirectToApp();
         },
         onError: (authError) => {
-          setError(authError.error.message || authError.error.statusText);
+          dispatch({
+            type: "set-error",
+            value: authError.error.message || authError.error.statusText,
+          });
         },
       },
     );
 
-    setIsSubmitting(false);
+    dispatch({ type: "set-submitting", value: false });
   };
 
   if (isPending) {
@@ -161,7 +222,7 @@ function RouteComponent() {
     <main className="mx-auto mt-10 w-full max-w-md px-6">
       <div className="space-y-6">
         <div className="space-y-2 text-center">
-          <h1 className="text-3xl font-bold">Log in or sign up</h1>
+          <h1 className="text-3xl font-semibold">Log in or sign up</h1>
           <p className="text-sm text-muted-foreground">
             Use one page for new and existing accounts.
           </p>
@@ -207,7 +268,7 @@ function RouteComponent() {
                 name="name"
                 autoComplete="name"
                 value={name}
-                onChange={(event) => setName(event.target.value)}
+                onChange={(event) => dispatch({ type: "set-name", value: event.target.value })}
               />
             </div>
 
@@ -222,10 +283,7 @@ function RouteComponent() {
               variant="link"
               className="w-full"
               disabled={isSubmitting}
-              onClick={() => {
-                setPendingSignup(null);
-                setError(null);
-              }}
+              onClick={() => dispatch({ type: "reset-pending-signup" })}
             >
               Use a different email
             </Button>
@@ -240,7 +298,7 @@ function RouteComponent() {
                 type="email"
                 autoComplete="email"
                 value={email}
-                onChange={(event) => setEmail(event.target.value)}
+                onChange={(event) => dispatch({ type: "set-email", value: event.target.value })}
               />
             </div>
 
@@ -252,7 +310,7 @@ function RouteComponent() {
                 type="password"
                 autoComplete="current-password"
                 value={password}
-                onChange={(event) => setPassword(event.target.value)}
+                onChange={(event) => dispatch({ type: "set-password", value: event.target.value })}
               />
             </div>
 
