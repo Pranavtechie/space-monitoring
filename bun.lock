@@ -23,6 +23,7 @@
       "dependencies": {
         "@app/api": "workspace:*",
         "@app/auth": "workspace:*",
+        "@app/db": "workspace:*",
         "@app/env": "workspace:*",
         "@app/ui": "workspace:*",
         "@libsql/client": "catalog:",
@@ -39,6 +40,7 @@
         "better-auth": "catalog:",
         "dayjs": "^1.11.20",
         "dotenv": "catalog:",
+        "drizzle-orm": "^0.45.1",
         "libsql": "catalog:",
         "lucide-react": "^1.8.0",
         "next-themes": "catalog:",

@@ -18,6 +18,17 @@ export function createAuth() {
     emailAndPassword: {
       enabled: true,
     },
+    socialProviders: {
+      google: {
+        clientId: env.GOOGLE_CLIENT_ID,
+        clientSecret: env.GOOGLE_CLIENT_SECRET,
+      },
+      twitter: {
+        clientId: env.TWITTER_CLIENT_ID,
+        clientSecret: env.TWITTER_CLIENT_SECRET,
+        scope: ["users.read", "tweet.read", "offline.access", "users.email"],
+      },
+    },
     secret: env.BETTER_AUTH_SECRET,
     baseURL: env.BETTER_AUTH_URL,
     plugins: [tanstackStartCookies()],
