@@ -14,6 +14,8 @@ const db = await D1Database("database", {
 
 export const web = await TanStackStart("web", {
   cwd: "../../apps/web",
+  name: "space-monitoring",
+  domains: [{ domainName: "space-monitoring.tech", adopt: true }],
   bindings: {
     DB: db,
     CORS_ORIGIN: alchemy.env.CORS_ORIGIN!,

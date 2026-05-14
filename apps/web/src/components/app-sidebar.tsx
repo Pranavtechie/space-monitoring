@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useRouterState } from "@tanstack/react-router";
 import {
   BookOpenIcon,
   Building2Icon,
@@ -20,7 +21,7 @@ import {
   SidebarRail,
 } from "@app/ui/components/sidebar";
 
-const data = {
+const navItems = {
   navMain: [
     {
       title: "Workspace",
@@ -119,21 +120,24 @@ const data = {
   ],
 };
 
+function isPathActive(currentPath: string, itemPath: string) {
+  if (itemPath === "#") {
+    return false;
+  }
+
+  return currentPath === itemPath;
+}
+
 function AppBrand() {
   return (
     <div className="flex h-14 items-center gap-3 px-2 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0">
       <div className="flex aspect-square size-9 shrink-0 items-center justify-center overflow-hidden rounded-full">
-        <img
-          src="/earth.png"
-          alt=""
-          className="size-full object-cover"
-          aria-hidden="true"
-        />
+        <img src="/earth.png" alt="" className="size-full object-cover" aria-hidden="true" />
       </div>
       <div className="grid flex-1 text-left leading-tight group-data-[collapsible=icon]:hidden">
-        <span className="truncate text-sm font-semibold">Space Monitoring</span>
+        <span className="truncate text-sm font-semibold">Space Monitoring </span>
         <span className="truncate text-xs text-muted-foreground">
-          Mission Control
+          Monitor the <span className="font-extrabold">Space Industry</span>
         </span>
       </div>
     </div>
@@ -141,14 +145,34 @@ function AppBrand() {
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const currentPath = useRouterState({
+    select: (state) => state.location.pathname,
+  });
+  const navMain = navItems.navMain.map((item) => {
+    const items = item.items?.map((subItem) => ({
+      ...subItem,
+      isActive: isPathActive(currentPath, subItem.url),
+    }));
+
+    return {
+      ...item,
+      isActive: isPathActive(currentPath, item.url) || items?.some((subItem) => subItem.isActive),
+      items,
+    };
+  });
+  const projects = navItems.projects.map((project) => ({
+    ...project,
+    isActive: isPathActive(currentPath, project.url),
+  }));
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <AppBrand />
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
+        <NavMain items={navMain} />
+        <NavProjects projects={projects} />
       </SidebarContent>
       <SidebarFooter>
         <div className="px-2 pb-1">
