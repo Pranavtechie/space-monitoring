@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1778471786831,
+      "tag": "0000_wooden_whirlwind",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1778474786831,
+      "tag": "0001_create_institution",
+      "breakpoints": true
+    }
+  ]
+}

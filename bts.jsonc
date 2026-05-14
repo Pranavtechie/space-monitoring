@@ -1,0 +1,31 @@
+// Better-T-Stack
+//
+// Website: https://www.better-t-stack.dev/
+// Stack Builder: https://www.better-t-stack.dev/new
+// Analytics: https://www.better-t-stack.dev/analytics
+// Showcase: https://www.better-t-stack.dev/showcase
+// Sponsor: https://github.com/sponsors/AmanVarshney01
+//
+// Add new addons with: bun create better-t-stack add
+// This file is safe to delete
+
+{
+  "$schema": "https://r2.better-t-stack.dev/schema.json",
+  "version": "3.28.0",
+  "createdAt": "2026-05-11T03:46:58.777Z",
+  "reproducibleCommand": "bun create better-t-stack@latest app --frontend tanstack-start --backend self --runtime none --database sqlite --orm drizzle --api trpc --auth better-auth --payments none --addons oxlint --examples none --db-setup d1 --web-deploy cloudflare --server-deploy none --git --package-manager bun --install",
+  "database": "sqlite",
+  "orm": "drizzle",
+  "backend": "self",
+  "runtime": "none",
+  "frontend": ["tanstack-start"],
+  "addons": ["oxlint"],
+  "examples": [],
+  "auth": "better-auth",
+  "payments": "none",
+  "packageManager": "bun",
+  "dbSetup": "d1",
+  "api": "trpc",
+  "webDeploy": "cloudflare",
+  "serverDeploy": "none",
+}

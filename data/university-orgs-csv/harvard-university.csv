@@ -1,0 +1,31 @@
+Name,Type,Category,Relevance,Confidence,Direct Link
+Harvard-Smithsonian Center for Astrophysics (CfA),Institute,Astronomy,Leading research institute combining Harvard and Smithsonian resources to study the universe's origin and evolution.,Direct,https://www.cfa.harvard.edu/
+Harvard Undergraduate Space Initiative (HUSI),Student Org,Space,"Primary undergraduate hub for aerospace projects, satellite design, and space policy initiatives.",Direct,https://huspace.org/
+Harvard Rockets,Design Team,Rockets,Student-led organization focused on high-power rocketry and experimental propulsion system development.,Direct,https://rocketry.seas.harvard.edu/
+Harvard Satellite Team,Design Team,Satellites,Engineering group developing CubeSats and testing small satellite hardware and communication protocols.,Direct,https://satellite.seas.harvard.edu/
+Black Hole Initiative (BHI),Center,Astrophysics,"Interdisciplinary center dedicated to the study of black holes through theory, observation, and engineering.",Direct,https://bhi.fas.harvard.edu/
+Institute for Theory and Computation (ITC),Institute,Astrophysics,Research center focused on theoretical astrophysics and computational modeling of cosmic structures.,Direct,https://itc.cfa.harvard.edu/
+Harvard Origins of Life Initiative,Faculty Group,Planetary,Multi-departmental initiative investigating the chemical and physical processes leading to life on Earth and other planets.,Direct,https://origins.harvard.edu/
+Department of Astronomy,Departmental Program,Astronomy,"Academic department managing research in stellar evolution, cosmology, and planetary systems.",Direct,https://astronomy.fas.harvard.edu/
+Harvard Microrobotics Lab,Lab,Robotics,Research into bio-inspired robots that are frequently studied for potential extraterrestrial or confined space exploration.,Strongly Adjacent,https://micro.seas.harvard.edu/
+Harvard Biorobotics Lab,Lab,Robotics,Develops robotic systems and sensors that intersect with extreme environment exploration and teleoperation.,Strongly Adjacent,https://biorobotics.seas.harvard.edu/
+Harvard Atmospheric Chemistry Modeling Group,Lab,Remote Sensing,Utilizes satellite observations and remote sensing data to model atmospheric dynamics and chemical composition.,Direct,https://acmg.seas.harvard.edu/
+Environmental Chemistry and Geochemical Group (ECGG),Lab,Planetary,Conducts research on planetary geomorphology and environmental conditions in the solar system.,Direct,https://eps.harvard.edu/people/ann-pearson
+Harvard University Radio Club (W1AF),Club,UAV/Avionics,"Focuses on amateur radio communications, including satellite tracking and data reception from orbiting spacecraft.",Loosely Adjacent,https://w1af.harvard.edu/
+Harvard SEDS,Student Org,Space,Harvard chapter of Students for the Exploration and Development of Space focusing on networking and competitions.,Direct,https://www.seds.org/
+Harvard Mars Project,Historical,Space,Inactive student research group that previously focused on Martian colonization and life support technologies.,Direct,N/A
+Harvard-MIT Program in Health Sciences and Technology (HST),Departmental Program,Space,Joint program investigating bioastronautics and the effects of long-duration spaceflight on human physiology.,Strongly Adjacent,https://hst.mit.edu/
+Harvard Robotics Club,Student Org,Robotics,"Undergraduate group building automated systems, including rovers and drone platforms relevant to space navigation.",Strongly Adjacent,https://robotics.seas.harvard.edu/
+Harvard Graduate Student Space Club,Student Org,Space,Organizes professional development and social events for graduate students interested in the space industry.,Direct,N/A
+Solar & Stellar X-ray Group (SSXG),Faculty Group,Astronomy,Researches stellar coronae and high-energy processes using space-based X-ray observatories like Chandra.,Direct,https://www.cfa.harvard.edu/ssxg/
+High-Energy Astrophysics Division (HEAD),Center,Astrophysics,"Division of CfA specializing in cosmic rays, gamma rays, and the instrumentation required to detect them in space.",Direct,https://www.cfa.harvard.edu/about/organization/head
+The Galileo Project,Institute,Astronomy,Research initiative aimed at identifying extraterrestrial technological signatures and anomalous interstellar objects.,Direct,https://projects.iq.harvard.edu/galileo/home
+Center for Integrated Quantum Materials (CIQM),Center,UAV/Avionics,Develops quantum sensors and materials critical for advanced navigation and space-based measurement systems.,Strongly Adjacent,https://ciqm.harvard.edu/
+Harvard Micro-Electro-Mechanical Systems (MEMS) Lab,Lab,Propulsion,Researches micro-propulsion and sensor technologies utilized in CubeSats and small-scale spacecraft.,Strongly Adjacent,https://mems.seas.harvard.edu/
+Harvard College Observatory (HCO),Institute,Astronomy,Historical institution managing telescope facilities and astronomical data archives.,Direct,https://hco.harvard.edu/
+Central Engineering at CfA,Faculty Group,Avionics,Internal engineering team providing specialized design and fabrication for space-based instrumentation.,Direct,https://www.cfa.harvard.edu/facilities-technology/engineering
+Harvard Uncrewed Aerial Vehicle Group,Student Org,UAV/Avionics,"Focuses on flight controls, autonomous navigation, and avionics for airborne platforms.",Strongly Adjacent,N/A
+Harvard Planetary Sciences (EPS),Departmental Program,Planetary,Academic track within Earth and Planetary Sciences focused on solar system dynamics and planetary geology.,Direct,https://eps.harvard.edu/
+Harvard Radiation Laboratory,Historical,Plasma,Former wartime laboratory that contributed heavily to microwave and radar technology used in modern aerospace.,Loosely Adjacent,N/A
+Harvard-Smithsonian Radio Astronomy Service (HSRAS),Institute,Astronomy,Operates radio telescopes and analyzes cosmic microwave background and other radio signals from space.,Direct,https://www.cfa.harvard.edu/facilities-technology/radio-telescope-data-center
+Star-Planet Connection Group,Lab,Astronomy,Research group at CfA investigating interactions between exoplanets and their host stars.,Direct,https://www.cfa.harvard.edu/research/star-planet-connection
