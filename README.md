@@ -21,6 +21,15 @@ This project deploys through Alchemy, which generates the Worker configuration a
 
 Do not use `npx wrangler deploy` as the deploy command for this repo. There is no committed root `wrangler.jsonc`; Alchemy owns the Worker, D1 binding, domain, and generated Wrangler config.
 
+Alchemy uses a Cloudflare-backed remote state store in CI. Set these Cloudflare build environment variables:
+
+- `ALCHEMY_STATE_TOKEN`: a long random secret shared by every deploy of this project
+- `CLOUDFLARE_ACCOUNT_ID`: the target Cloudflare account ID
+- `CLOUDFLARE_API_TOKEN`: an API token that can manage Workers, D1, Durable Objects, routes/domains, and the state-store Worker
+- `CORS_ORIGIN`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `TWITTER_CLIENT_ID`, and `TWITTER_CLIENT_SECRET`: app bindings used by `packages/infra/alchemy.run.ts`
+
+If the state-store Worker already exists with the wrong token, set `ALCHEMY_STATE_STORE_FORCE_UPDATE=true` for one deploy, then remove it after the deploy succeeds.
+
 ## Structure
 
 ```text

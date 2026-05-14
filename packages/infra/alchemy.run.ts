@@ -1,12 +1,19 @@
 import alchemy from "alchemy";
 import { TanStackStart } from "alchemy/cloudflare";
 import { D1Database } from "alchemy/cloudflare";
+import { CloudflareStateStore } from "alchemy/state";
 import { config } from "dotenv";
 
 config({ path: "./.env" });
 config({ path: "../../apps/web/.env" });
 
-const app = await alchemy("app");
+const app = await alchemy("app", {
+  adopt: true,
+  stateStore: (scope) =>
+    new CloudflareStateStore(scope, {
+      forceUpdate: process.env.ALCHEMY_STATE_STORE_FORCE_UPDATE === "true",
+    }),
+});
 
 const db = await D1Database("database", {
   migrationsDir: "../../packages/db/src/migrations",
