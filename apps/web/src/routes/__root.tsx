@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import type { AppRouter } from "@app/api/routers/index";
 import { Toaster } from "@app/ui/components/sonner";
 import { TooltipProvider } from "@app/ui/components/tooltip";
@@ -55,6 +56,12 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 });
 
 function RootDocument() {
+  useEffect(() => {
+    if (import.meta.env.DEV) {
+      void import("react-grab");
+    }
+  }, []);
+
   return (
     <html lang="en" className="dark">
       <head>

@@ -2,16 +2,12 @@ import * as React from "react";
 import { useRouterState } from "@tanstack/react-router";
 import {
   BookOpenIcon,
-  Building2Icon,
-  ChartNoAxesCombinedIcon,
   DatabaseIcon,
-  LayoutDashboardIcon,
   Settings2Icon,
   SquareTerminalIcon,
 } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
-import { NavProjects } from "@/components/nav-projects";
 import UserMenu from "@/components/user-menu";
 import {
   Sidebar,
@@ -101,23 +97,6 @@ const navItems = {
       ],
     },
   ],
-  projects: [
-    {
-      name: "Dashboard",
-      url: "/dashboard",
-      icon: <LayoutDashboardIcon />,
-    },
-    {
-      name: "Analytics",
-      url: "#",
-      icon: <ChartNoAxesCombinedIcon />,
-    },
-    {
-      name: "Directory",
-      url: "/",
-      icon: <Building2Icon />,
-    },
-  ],
 };
 
 function isPathActive(currentPath: string, itemPath: string) {
@@ -160,11 +139,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       items,
     };
   });
-  const projects = navItems.projects.map((project) => ({
-    ...project,
-    isActive: isPathActive(currentPath, project.url),
-  }));
-
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -172,7 +146,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={navMain} />
-        <NavProjects projects={projects} />
       </SidebarContent>
       <SidebarFooter>
         <div className="px-2 pb-1">

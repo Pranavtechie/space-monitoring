@@ -1,19 +1,26 @@
 import alchemy from "alchemy";
 import { TanStackStart } from "alchemy/cloudflare";
 import { D1Database } from "alchemy/cloudflare";
-import { CloudflareStateStore } from "alchemy/state";
+import { CloudflareStateStore, FileSystemStateStore } from "alchemy/state";
 import { config } from "dotenv";
 
 config({ path: "./.env" });
 config({ path: "../../apps/web/.env" });
 
+const isLocalDev = process.argv.includes("--dev");
+
 const app = await alchemy("app", {
   adopt: true,
-  stateStore: (scope) =>
-    new CloudflareStateStore(scope, {
+  stateStore: (scope) => {
+    if (isLocalDev) {
+      return new FileSystemStateStore(scope);
+    }
+
+    return new CloudflareStateStore(scope, {
       scriptName: "space-monitoring-alchemy-state",
       forceUpdate: process.env.ALCHEMY_STATE_STORE_FORCE_UPDATE === "true",
-    }),
+    });
+  },
 });
 
 const db = await D1Database("database", {
@@ -23,6 +30,10 @@ const db = await D1Database("database", {
 export const web = await TanStackStart("web", {
   cwd: "../../apps/web",
   name: "space-monitoring",
+  dev: {
+    command: "bun run dev",
+    domain: "space-monitoring.localhost",
+  },
   domains: [{ domainName: "space-monitoring.tech", adopt: true }],
   bindings: {
     DB: db,

@@ -23,10 +23,11 @@
   },
   "type": "module",
   "scripts": {
-    "dev": "bun run --filter '*' dev",
+    "dev": "bun run dev:infra",
     "build": "bun run --filter '*' build",
     "check-types": "bun run --filter '*' check-types",
     "dev:web": "bun run --filter @space-monitoring/web dev",
+    "dev:infra": "bun run --filter @app/infra dev",
     "db:push": "bun run --filter @app/db db:push",
     "db:generate": "bun run --filter @app/db db:generate",
     "deploy": "bun run --filter @app/infra deploy",

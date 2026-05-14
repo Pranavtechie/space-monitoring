@@ -18,12 +18,6 @@ function HomeComponent() {
 
   return (
     <AppLayout>
-      <section className="grid gap-2">
-        <h1 className="text-2xl font-semibold tracking-tight">Dashboard</h1>
-        <p className="text-muted-foreground max-w-2xl text-sm">
-          A shared workspace for orbital data, monitoring tools, and mission workflows.
-        </p>
-      </section>
       <section className="grid gap-4 md:grid-cols-3">
         <div className="md:col-span-2 xl:col-span-1">
           {nextLaunch.isLoading ? (
