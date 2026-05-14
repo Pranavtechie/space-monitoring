@@ -30,6 +30,7 @@
     "db:push": "bun run --filter @app/db db:push",
     "db:generate": "bun run --filter @app/db db:generate",
     "deploy": "bun run --filter @app/infra deploy",
+    "deploy:worker": "bun run deploy",
     "destroy": "bun run --filter @app/infra destroy",
     "check": "oxlint && oxfmt --write"
   },
@@ -44,7 +45,8 @@
     "@types/node": "catalog:",
     "oxfmt": "^0.46.0",
     "oxlint": "^1.61.0",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "wrangler": "^4.91.0"
   },
   "packageManager": "bun@1.3.11"
 }
