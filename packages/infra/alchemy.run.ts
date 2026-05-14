@@ -11,6 +11,7 @@ const app = await alchemy("app", {
   adopt: true,
   stateStore: (scope) =>
     new CloudflareStateStore(scope, {
+      scriptName: "space-monitoring-alchemy-state",
       forceUpdate: process.env.ALCHEMY_STATE_STORE_FORCE_UPDATE === "true",
     }),
 });
