@@ -4,7 +4,7 @@ import {
   BookOpenIcon,
   DatabaseIcon,
   Settings2Icon,
-  SquareTerminalIcon,
+  Landmark,
 } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
@@ -20,22 +20,18 @@ import {
 const navItems = {
   navMain: [
     {
-      title: "Workspace",
+      title: "Institutions",
       url: "/",
-      icon: <SquareTerminalIcon />,
+      icon: <Landmark />,
       isActive: true,
       items: [
         {
-          title: "Home",
-          url: "/",
+          title: "NASA",
+          url: "/nasa",
         },
         {
-          title: "Dashboard",
-          url: "/dashboard",
-        },
-        {
-          title: "Sign in",
-          url: "/login",
+          title: "University Orgs",
+          url: "/university-orgs",
         },
       ],
     },
@@ -111,10 +107,17 @@ function AppBrand() {
   return (
     <div className="flex h-14 items-center gap-3 px-2 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0">
       <div className="flex aspect-square size-9 shrink-0 items-center justify-center overflow-hidden rounded-full">
-        <img src="/earth.png" alt="" className="size-full object-cover" aria-hidden="true" />
+        <img
+          src="/earth.png"
+          alt=""
+          className="size-full object-cover"
+          aria-hidden="true"
+        />
       </div>
       <div className="grid flex-1 text-left leading-tight group-data-[collapsible=icon]:hidden">
-        <span className="truncate text-sm font-semibold">Space Monitoring </span>
+        <span className="truncate text-sm font-semibold">
+          Space Monitoring{" "}
+        </span>
         <span className="truncate text-xs text-muted-foreground">
           Monitor the <span className="font-extrabold">Space Industry</span>
         </span>
@@ -135,7 +138,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
     return {
       ...item,
-      isActive: isPathActive(currentPath, item.url) || items?.some((subItem) => subItem.isActive),
+      isActive:
+        isPathActive(currentPath, item.url) ||
+        items?.some((subItem) => subItem.isActive),
       items,
     };
   });

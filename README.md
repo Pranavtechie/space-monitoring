@@ -54,8 +54,51 @@ misc/              Notes, prompts, and planning docs
 - `apps/web/src/routes/*`: File-based app routes.
 - `apps/web/src/routeTree.gen.ts`: generated TanStack Router tree; avoid manual edits.
 - `packages/db/drizzle.config.ts`: Drizzle Kit config; loads env from `apps/web/.env`.
-- `packages/db/src/schema/*`: database tables for auth and institutions.
+- `packages/db/src/schema/*`: database tables for auth, institutions, and organizations.
 - `packages/ui/components.json` and `apps/web/components.json`: shadcn configuration.
+
+## Database & Seeding
+
+### Migrations
+
+Migrations live in `packages/db/src/migrations/`. Generate a new migration after schema changes with `bun run db:generate`. The snapshot at `meta/0002_snapshot.json` is the baseline — Drizzle diffs against it so future generates only emit new changes.
+
+To apply migrations to remote D1:
+```bash
+wrangler d1 execute app-database-pranav --remote --file packages/db/src/migrations/<file>.sql
+```
+
+### Seed scripts
+
+`scripts/seed-institutions.sql` and `scripts/seed-orgs.sql` are generated from source data. Regenerate the org seed (e.g. after adding CSVs) with:
+```bash
+bun scripts/seed-orgs.ts
+```
+
+Apply seeds to **remote (prod) D1**:
+```bash
+wrangler d1 execute app-database-pranav --remote --file scripts/seed-institutions.sql
+wrangler d1 execute app-database-pranav --remote --file scripts/seed-orgs.sql
+```
+
+### Local D1 — two paths, one matters
+
+Alchemy's dev setup exposes two separate SQLite files. Only one is used by the running Workers runtime:
+
+| Path | Used by |
+|---|---|
+| `.alchemy/miniflare/v3/d1/miniflare-D1DatabaseObject/*.sqlite` | **App at runtime** — seed this one |
+| `apps/web/.alchemy/local/.wrangler/state/v3/d1/miniflare-D1DatabaseObject/*.sqlite` | `wrangler d1 execute --local` CLI only |
+
+Seed the local runtime DB directly with sqlite3:
+```bash
+# find the file (hash may change after a full Alchemy reset)
+DB=$(find .alchemy/miniflare/v3/d1/miniflare-D1DatabaseObject -name "*.sqlite" ! -name "metadata.sqlite")
+sqlite3 "$DB" < scripts/seed-institutions.sql
+sqlite3 "$DB" < scripts/seed-orgs.sql
+```
+
+The hash filename (`0ad7cc...`) stays stable across normal dev restarts but will change if the Alchemy state is fully reset (e.g. `bun run destroy` + `bun run dev`).
 
 ## Conventions
 
