@@ -1,5 +1,8 @@
+import { inspect } from "util";
+inspect.defaultOptions.depth = null;
+
 import alchemy from "alchemy";
-import { TanStackStart } from "alchemy/cloudflare";
+import { TanStackStart, Worker } from "alchemy/cloudflare";
 import { D1Database } from "alchemy/cloudflare";
 import { CloudflareStateStore, FileSystemStateStore } from "alchemy/state";
 import { config } from "dotenv";
@@ -11,6 +14,7 @@ const isLocalDev = process.argv.includes("--dev");
 
 const app = await alchemy("app", {
   adopt: true,
+  debug: true,
   stateStore: (scope) => {
     if (isLocalDev) {
       return new FileSystemStateStore(scope);
@@ -47,6 +51,17 @@ export const web = await TanStackStart("web", {
   },
 });
 
+export const rssWorker = await Worker("rss-fetcher", {
+  name: "space-monitoring-rss",
+  entrypoint: "./src/index.ts",
+  cwd: "../../apps/rss-worker",
+  crons: ["0 * * * *"],
+  bindings: {
+    DB: db,
+  },
+});
+
 console.log(`Web    -> ${web.url}`);
+console.log(`RSS    -> ${rssWorker.url}`);
 
 await app.finalize();

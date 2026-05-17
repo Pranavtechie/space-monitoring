@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<opml version="2.0">
+  <head>
+    <title>Space Monitoring Feeds</title>
+    <ownerName>Space Monitoring</ownerName>
+  </head>
+  <body>
+
+    <outline text="Launch &amp; Mission News" title="Launch &amp; Mission News">
+      <outline text="Spaceflight Now" type="rss"
+        xmlUrl="https://spaceflightnow.com/feed/"
+        htmlUrl="https://spaceflightnow.com/" />
+      <outline text="NASASpaceFlight" type="rss"
+        xmlUrl="https://www.nasaspaceflight.com/feed/"
+        htmlUrl="https://www.nasaspaceflight.com/" />
+      <outline text="Space.com" type="rss"
+        xmlUrl="https://www.space.com/feeds/all"
+        htmlUrl="https://www.space.com/" />
+      <outline text="SpaceNews" type="rss"
+        xmlUrl="https://spacenews.com/feed/"
+        htmlUrl="https://spacenews.com/" />
+      <outline text="The Planetary Society" type="rss"
+        xmlUrl="https://www.planetary.org/articles.rss"
+        htmlUrl="https://www.planetary.org/" />
+    </outline>
+
+    <outline text="Agency News" title="Agency News">
+      <outline text="NASA Breaking News" type="rss"
+        xmlUrl="https://www.nasa.gov/rss/dyn/breaking_news.rss"
+        htmlUrl="https://www.nasa.gov/" />
+      <outline text="NASA News Releases" type="rss"
+        xmlUrl="https://www.nasa.gov/rss/dyn/NewsandFeatures.rss"
+        htmlUrl="https://www.nasa.gov/news/" />
+      <outline text="ESA Top News" type="rss"
+        xmlUrl="https://www.esa.int/rssfeed/Our_Activities/Space_News"
+        htmlUrl="https://www.esa.int/" />
+      <outline text="ESA Space Science" type="rss"
+        xmlUrl="https://www.esa.int/rssfeed/Our_Activities/Space_Science"
+        htmlUrl="https://www.esa.int/Science_Exploration/Space_Science" />
+      <outline text="JAXA News" type="rss"
+        xmlUrl="https://global.jaxa.jp/rss/news.rss"
+        htmlUrl="https://global.jaxa.jp/" />
+    </outline>
+
+    <outline text="Research &amp; Science" title="Research &amp; Science">
+      <outline text="NASA JPL News" type="rss"
+        xmlUrl="https://www.jpl.nasa.gov/feeds/news"
+        htmlUrl="https://www.jpl.nasa.gov/" />
+      <outline text="Astronomy Picture of the Day" type="rss"
+        xmlUrl="https://apod.nasa.gov/apod.rss"
+        htmlUrl="https://apod.nasa.gov/" />
+      <outline text="arXiv Astrophysics" type="rss"
+        xmlUrl="https://rss.arxiv.org/rss/astro-ph"
+        htmlUrl="https://arxiv.org/list/astro-ph/recent" />
+      <outline text="arXiv Space Physics" type="rss"
+        xmlUrl="https://rss.arxiv.org/rss/physics.space-ph"
+        htmlUrl="https://arxiv.org/list/physics.space-ph/recent" />
+      <outline text="Space Weather" type="rss"
+        xmlUrl="https://spaceweather.com/index.php?rss=1"
+        htmlUrl="https://spaceweather.com/" />
+    </outline>
+
+    <outline text="Industry &amp; Commercial" title="Industry &amp; Commercial">
+      <outline text="Ars Technica Space" type="rss"
+        xmlUrl="https://feeds.arstechnica.com/arstechnica/space"
+        htmlUrl="https://arstechnica.com/space/" />
+      <outline text="Aviation Week Space" type="rss"
+        xmlUrl="https://aviationweek.com/rss.xml"
+        htmlUrl="https://aviationweek.com/" />
+      <outline text="Parabolic Arc" type="rss"
+        xmlUrl="https://www.parabolicarc.com/feed/"
+        htmlUrl="https://www.parabolicarc.com/" />
+      <outline text="Space Policy Institute" type="rss"
+        xmlUrl="https://spacepolicy.gwu.edu/feed/"
+        htmlUrl="https://spacepolicy.gwu.edu/" />
+    </outline>
+
+  </body>
+</opml>
